@@ -29,7 +29,7 @@ The command to convert to 16000 Hz, using the ffpmeg package is: ```ffmpeg -i [s
 If you want to use your own microphone, you can set up your own local [deepspeech server](https://github.com/MainRo/deepspeech-server) and you would have to modify the birds_demo.sh script. For this project, I did not want to do this but it can be done. 
 
 # DeepSpeech
-    1) Follow the instructions on installing [Mozilla DeepSpeech](https://github.com/mozilla/DeepSpeech) package, and then download the latest [pretrained model](https://github.com/mozilla/DeepSpeech/releases), as well as the checkpoints. However, note that you must edit their [client.py file](https://github.com/mozilla/DeepSpeech/blob/master/native_client/python/client.py) via adding the lines 
+1) Follow the instructions on installing [Mozilla DeepSpeech](https://github.com/mozilla/DeepSpeech) package, and then download the latest [pretrained model](https://github.com/mozilla/DeepSpeech/releases), as well as the checkpoints. However, note that you must edit their [client.py file](https://github.com/mozilla/DeepSpeech/blob/master/native_client/python/client.py) via adding the lines 
 
 ``` parser.add_argument('--outfile', required=False, help='Path to save the text') ``` --> in the main function.
 
@@ -46,7 +46,7 @@ And add the following at the end of the main function in client.py
 
 when you install deepspeech on your own computer. If you do not do this, DeepSpeech will not write saved the outputted text. This is also included in my repo if you are confused where to add either of these statements.
     
-    2) Alternatively, I have provided the checkpoints and pretrained model I used when building this project. Regardless, you stil have to change the client.py file after you install the deepspeech package on your computer. 
+2) Alternatively, I have provided the checkpoints and pretrained model I used when building this project. Regardless, you stil have to change the client.py file after you install the deepspeech package on your computer. 
 
 Use my DeepSpeech file on github Repo. Download the pretrained model, but follow what I did with the client.py file.
 
