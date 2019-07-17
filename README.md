@@ -4,7 +4,7 @@ This final project was created during my Machine Learning for Signal Processing 
 
 # Requirements
 
-Python3.6+
+Python 3.6+
 
 TensorFlow 1.13+
 
@@ -16,6 +16,10 @@ Runs on the GPU at the momemnt
 
 
 # How to Run
+
+Download the deepspeech package, and the download the DeepSpeech pretrained model
+
+Download my pretrained model from [StackGAN](https://github.com/akhilvasvani/StackGAN)
 
 If all the requirements are met, run ```birds_demo.sh``` and a few seconds later an image will output.
 
@@ -46,19 +50,20 @@ And add the following at the end of the main function in client.py
 
 when you install deepspeech on your own computer. If you do not do this, DeepSpeech will not write saved the outputted text. This is also included in my repo if you are confused where to add either of these statements.
     
-2) Alternatively, I have provided the checkpoints and pretrained model I used when building this project. Regardless, you stil have to change the client.py file after you install the deepspeech package on your computer. 
+2) Alternatively, after you have downloaded the deepspeech package on your computer, you can download the [pretrained DeeSpeech model](https://drive.google.com/open?id=1JOltcT06wR61YXMVZohbAJmA52Rpcjsv) I used when building this project. Regardless, you stil have to change the client.py file. 
+Create and save all the contents to the folder name ``deepspeech-0.5.0-models`` 
 
-Use my DeepSpeech file on github Repo. Download the pretrained model, but follow what I did with the client.py file.
 
 
 # Text Encoder
 
-At the moment, I did not use an alternative way to extract the text embeddings. Basically, the get_embedding.lua file converts your example sentence into the specific text embedding needed to run for the StackGAN. You will need to download Torch and the respective requirements.
+At the moment, I did not use an alternative way to extract the text embeddings. Basically, the get_embedding.lua file converts your example sentence into the specific text embedding needed to run for the StackGAN. You will need to download Torch and as well as the 
+[embedding file](https://drive.google.com/open?id=1a11TUAQKrHxRWnzWBTLpK9FkZdZqhKlT) and save it to the folder ``text_encoder``.
 
 
 # StackGAN
 
-The model is already pretrained, so there is nothing to worry about. Everything is update from the original [StackGAN](https://github.com/hanzhanggit/StackGAN)
+Download my pretrained [StackGAN](https://github.com/akhilvasvani/StackGAN), so there is nothing to worry about. Everything is updated from the original StackGAN code. Note: you cannot use the original pretrained model by Han Zhang.
 
 # Issues
 
