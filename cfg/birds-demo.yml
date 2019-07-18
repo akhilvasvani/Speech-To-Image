@@ -5,8 +5,8 @@ GPU_ID: 0
 Z_DIM: 100
 
 TEST:
-    PRETRAINED_MODEL: './models/birds_model_333000.ckpt'
-    BATCH_SIZE: 32 # 64
+    PRETRAINED_MODEL: './models/model_330000.ckpt'
+    BATCH_SIZE: 64
     NUM_COPY: 8
 
 GAN:

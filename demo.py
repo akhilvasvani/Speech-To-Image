@@ -11,11 +11,11 @@ from PIL import Image, ImageDraw, ImageFont
 import re
 
 import sys
-sys.path.append('./misc')
+sys.path.append('misc')
 sys.path.append('stageII')
 
 from config import cfg, cfg_from_file
-from utils import mkdir_p
+from utils import mkdir_p, caption_convert
 from model import CondGAN
 from skimage.transform import resize
 
@@ -47,10 +47,6 @@ def sample_encoded_context(embeddings, model, bAugmentation=True):
         c = mean
     return c
 
-def convert_caption(cap):
-    '''function to convert captions from bytes to utf-8 encoding'''
-    return cap.decode("utf-8")
-
 
 def build_model(sess, embedding_dim, batch_size):
     model = CondGAN(lr_imsize=cfg.TEST.LR_IMSIZE, hr_lr_ratio=int(cfg.TEST.HR_IMSIZE/cfg.TEST.LR_IMSIZE))
@@ -76,6 +72,7 @@ def build_model(sess, embedding_dim, batch_size):
 
 
 def drawCaption(img, caption):
+    caption = caption_convert(caption)
     img_txt = Image.fromarray(img)
     # get a font
     fnt = ImageFont.truetype('Pillow/Tests/fonts/FreeMono.ttf', 50)
@@ -118,6 +115,7 @@ def save_super_images(sample_batchs, hr_sample_batchs, captions_batch, batch_siz
         # First row with up to 8 samples
         for i in range(np.minimum(8, len(sample_batchs))):
             lr_img = sample_batchs[i][j]
+            lr_img = (lr_img + 1.0) * 127.5
             hr_img = hr_sample_batchs[i][j]
             hr_img = (hr_img + 1.0) * 127.5
             re_sample = resize(lr_img, hr_img.shape[:2])
@@ -133,6 +131,7 @@ def save_super_images(sample_batchs, hr_sample_batchs, captions_batch, batch_siz
             row2 = [padding]
             for i in range(8, len(sample_batchs)):
                 lr_img = sample_batchs[i][j]
+                lr_img = (lr_img + 1.0) * 127.5
                 hr_img = hr_sample_batchs[i][j]
                 hr_img = (hr_img + 1.0) * 127.5
                 re_sample = resize(lr_img, hr_img.shape[:2])
@@ -150,7 +149,7 @@ def save_super_images(sample_batchs, hr_sample_batchs, captions_batch, batch_siz
         superimage = np.concatenate([top_padding, superimage], axis=0)
 
         fullpath = '%s/sentence%d.jpg' % (save_dir, startID + j)
-        superimage = drawCaption(np.uint8(superimage), convert_caption(captions_batch[j]))
+        superimage = drawCaption(np.uint8(superimage), captions_batch[j])
         imageio.imwrite(fullpath, superimage)
 
 
@@ -208,4 +207,4 @@ if __name__ == "__main__":
         print('Finish generating samples for %d sentences:' % num_embeddings)
         print('Example sentences:')
         for i in range(np.minimum(10, num_embeddings)):
-            print('Sentence %d: %s' % (i, convert_caption(captions_list[i])))
+            print('Sentence %d: %s' % (i, caption_convert(captions_list[i])))
