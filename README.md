@@ -32,6 +32,8 @@ The command to convert to 16000 Hz, using the ffpmeg package is: ```ffmpeg -i [s
 
 If you want to use your own microphone, you can set up your own local [deepspeech server](https://github.com/MainRo/deepspeech-server) and you would have to modify the birds_demo.sh script. For this project, I did not want to do this but it can be done. 
 
+I added in a script which can convert from .m4a file format to a .wav format for 16000 Hz.
+
 # DeepSpeech
 1) Follow the instructions on installing [Mozilla DeepSpeech](https://github.com/mozilla/DeepSpeech) package, and then download the latest [pretrained model](https://github.com/mozilla/DeepSpeech/releases), as well as the checkpoints. However, note that you must edit their [client.py file](https://github.com/mozilla/DeepSpeech/blob/master/native_client/python/client.py) via adding the lines 
 
@@ -54,6 +56,10 @@ when you install deepspeech on your own computer. If you do not do this, DeepSpe
 Create and save all the contents to the folder name ``deepspeech-0.5.0-models`` 
 
 
+# Text Segmenter and Punctuation
+
+Added in two networks which will segment your sentences and add punctuation to them. This is done, so that the outputted images by the StackGAN will be cleaner and nicer. For weird reason, when given one sentence, the text encoder produces a small .t7 file and the image created from it is poor. Unfortunately, the only way around this is to increase the size of the .t7 file, so the user will have to speak more sentences. However, because DeepSpeech is literally Speech to Text (no puncutation), I had to add these two networks to separate and punctuate the sentences. This adds more time to the total runtime of Speech to Image, so I am looking for a way around this.
+
 
 # Text Encoder
 
@@ -74,5 +80,7 @@ Please let me know of any issues and I am happy to correct them. Pull requests a
 [StackGAN](https://github.com/hanzhanggit/StackGAN)
 
 [Generative Adversarial Text-to-Image Synthesis](https://github.com/reedscot/icml2016)
+
+[DeepPunct and DeepSegment](http://bpraneeth.com/projects/)
 
 

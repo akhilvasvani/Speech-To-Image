@@ -13,8 +13,16 @@ deepspeech --model deepspeech-0.5.0-models/output_graph.pbmm \
 --alphabet deepspeech-0.5.0-models/alphabet.txt \
 --lm deepspeech-0.5.0-models/lm.binary \
 --trie deepspeech-0.5.0-models/trie \
---audio audio/birds_example.wav \
+--audio audio/birds_example_3.wav \
 --outfile ${CAPTION_PATH}.txt
+
+#
+# Add Punctuations
+#
+python3 correct_punctuation.py --input ${CAPTION_PATH}.txt \
+--params_path models/deeppunct_params_en \
+--checkpoint_path models/deeppunct_checkpoint_google_news \
+--output ${CAPTION_PATH}.txt
 
 #
 # Extract text embeddings from the encoder
